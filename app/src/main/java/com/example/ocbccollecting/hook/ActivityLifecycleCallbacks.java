@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
+import com.example.ocbccollecting.floatWindow.FloatWindowX;
 import com.example.ocbccollecting.hook.activity.BaseActivity;
 import com.example.ocbccollecting.hook.activity.DashboardActivity;
 import com.example.ocbccollecting.hook.activity.ErrorActivity;
@@ -73,6 +74,7 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
 
     @Override
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+        FloatWindowX.getInstance().show(activity);
         activities.forEach(baseActivity -> {
             if (baseActivity.isActivity(activity)) {
                 BaseActivity baseActivity1 = newInstance(baseActivity.getClass());

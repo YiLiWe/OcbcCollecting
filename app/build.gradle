@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation project(':FloatWindow')
+
     implementation libs.lombok
     annotationProcessor libs.lombok
     implementation libs.okhttp
