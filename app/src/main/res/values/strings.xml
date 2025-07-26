@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OcbcCollecting</string>
+    <string-array name="xposedscope">
+        <item>com.ocbcnisp.onemobileapp</item>
+        <item>com.samsung.android.cidmanager</item>
+    </string-array>
+</resources>
