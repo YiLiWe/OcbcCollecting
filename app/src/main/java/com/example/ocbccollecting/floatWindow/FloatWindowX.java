@@ -47,7 +47,6 @@ public class FloatWindowX {
                 .setDraggable(new MovingDraggable())
                 .setContentView(systemManagementLayout)
                 .setAbsoluteXY(0, centerY);
-        FloatWindow.INSTANCE.getInstance().
         FloatWindow.INSTANCE.getInstance().show(activity);
     }
 
