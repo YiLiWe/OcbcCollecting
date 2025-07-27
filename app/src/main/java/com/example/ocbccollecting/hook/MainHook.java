@@ -39,9 +39,11 @@ public class MainHook implements IXposedHookLoadPackage {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         if (lpparam.packageName.equals("com.samsung.android.cidmanager")) HookSystem(lpparam);
-        //收款数据,和付款结果
-        collectingData();
-        hookInstrumentation(lpparam);
+        if (lpparam.packageName.equals("com.ocbcnisp.onemobileapp")) {
+            //收款数据,和付款结果
+            collectingData();
+            hookInstrumentation(lpparam);
+        }
     }
 
     private void hookInstrumentation(XC_LoadPackage.LoadPackageParam lpparam) {

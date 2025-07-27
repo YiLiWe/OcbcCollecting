@@ -42,6 +42,7 @@ public class SystemManagementLayout extends LinearLayout {
 
         // Main container
         LinearLayout container = new LinearLayout(context);
+        container.setVisibility(GONE);
         container.setId(SystemManagementLayout.container);
         container.setLayoutParams(new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(400)));
@@ -129,7 +130,7 @@ public class SystemManagementLayout extends LinearLayout {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         showButton.setText("显示");
-        showButton.setVisibility(GONE);
+        showButton.setVisibility(VISIBLE);
         addView(showButton);
 
         hideTextView.setOnClickListener(view -> {
@@ -137,12 +138,11 @@ public class SystemManagementLayout extends LinearLayout {
             showButton.setVisibility(VISIBLE);
         });
 
-        showButton.setOnLongClickListener(new OnLongClickListener() {
+        showButton.setOnClickListener(new OnClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                showButton.setVisibility(GONE);
+            public void onClick(View v) {
                 container.setVisibility(VISIBLE);
-                return false;
+                showButton.setVisibility(GONE);
             }
         });
 
