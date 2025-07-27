@@ -31,6 +31,7 @@ public class SystemManagementLayout extends LinearLayout {
     private final Button showButton;
     //日志显示
     private final TextView contentText;
+    private final ScrollView scrollView;
 
     public SystemManagementLayout(Context context) {
         super(context);
@@ -102,7 +103,7 @@ public class SystemManagementLayout extends LinearLayout {
         contentArea.setOrientation(VERTICAL);
 
         // Scroll view
-        ScrollView scrollView = new ScrollView(context);
+        scrollView = new ScrollView(context);
         scrollView.setLayoutParams(new LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
@@ -147,6 +148,11 @@ public class SystemManagementLayout extends LinearLayout {
         });
 
         moreText.setOnClickListener(this::showConfigurationPopup);
+    }
+
+    public void printLog(String log) {
+        contentText.append(log + "\n");
+        scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
     }
 
     // In your SystemManagementLayout.java or similar file

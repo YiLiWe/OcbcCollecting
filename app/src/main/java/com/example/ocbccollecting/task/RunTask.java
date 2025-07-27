@@ -31,9 +31,7 @@ public class RunTask implements Runnable {
     }
 
     public void start() {
-        Logs.d("RunTask startX");
         if (getRun()) return;
-        Logs.d("RunTask start");
         scheduler.scheduleWithFixedDelay(this, 20, 20, TimeUnit.SECONDS);
         setRun(true);
     }
@@ -42,7 +40,6 @@ public class RunTask implements Runnable {
     public void run() {
         try {
             if (activityLifecycleCallbacks.getRunActivities().isEmpty()) {
-                Logs.d("stop RunTask runX");
                 setRun(false);
                 setImputationBeanOrder(null);
                 scheduler.shutdownNow();

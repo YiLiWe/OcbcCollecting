@@ -9,8 +9,12 @@ import com.example.ocbccollecting.view.SystemManagementLayout;
 import com.limbo.floatwindow.FloatWindow;
 import com.limbo.floatwindow.draggable.MovingDraggable;
 
+import lombok.Getter;
+
+@Getter
 public class FloatWindowX {
     private static FloatWindowX floatWindow;
+    private SystemManagementLayout systemManagementLayout;
 
     private int[] getScreenCenter(@NonNull Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -23,21 +27,30 @@ public class FloatWindowX {
     public static FloatWindowX getInstance(Activity activity) {
         if (FloatWindowX.floatWindow == null) {
             FloatWindowX.floatWindow = new FloatWindowX();
-            floatWindow.show(activity);
+            if (activity != null) {
+                floatWindow.show(activity);
+            }
         }
         return floatWindow;
+    }
+
+    public void printLog(String log) {
+        if (systemManagementLayout == null) return;
+        systemManagementLayout.printLog(log);
     }
 
     public void show(Activity activity) {
         int[] center = getScreenCenter(activity);
         int centerY = center[1];
-        SystemManagementLayout layout = new SystemManagementLayout(activity);
+        systemManagementLayout = new SystemManagementLayout(activity);
         FloatWindow.INSTANCE.init()
                 .setDraggable(new MovingDraggable())
-                .setContentView(layout)
+                .setContentView(systemManagementLayout)
                 .setAbsoluteXY(0, centerY);
+        FloatWindow.INSTANCE.getInstance().
         FloatWindow.INSTANCE.getInstance().show(activity);
     }
+
 
     public void destroy() {
         if (FloatWindowX.floatWindow != null) {

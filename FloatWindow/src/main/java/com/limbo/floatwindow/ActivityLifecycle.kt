@@ -18,7 +18,7 @@ class ActivityLifecycle(private val floatWindow: IFloatWindow) : Application.Act
     }
 
     override fun onActivityPaused(activity: Activity) {
-//        floatWindow.hide()
+       // floatWindow.hide()
     }
 
 
