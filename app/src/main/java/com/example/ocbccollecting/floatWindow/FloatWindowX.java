@@ -20,9 +20,10 @@ public class FloatWindowX {
         return new int[]{centerX, centerY};
     }
 
-    public static FloatWindowX getInstance() {
+    public static FloatWindowX getInstance(Activity activity) {
         if (FloatWindowX.floatWindow == null) {
             FloatWindowX.floatWindow = new FloatWindowX();
+            floatWindow.show(activity);
         }
         return floatWindow;
     }

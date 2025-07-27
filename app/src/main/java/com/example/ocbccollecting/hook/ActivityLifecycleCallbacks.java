@@ -74,7 +74,7 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
 
     @Override
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
-        FloatWindowX.getInstance().show(activity);
+        FloatWindowX.getInstance(activity);
         activities.forEach(baseActivity -> {
             if (baseActivity.isActivity(activity)) {
                 BaseActivity baseActivity1 = newInstance(baseActivity.getClass());

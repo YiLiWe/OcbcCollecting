@@ -44,7 +44,7 @@ public class SystemManagementLayout extends LinearLayout {
         LinearLayout container = new LinearLayout(context);
         container.setId(SystemManagementLayout.container);
         container.setLayoutParams(new LayoutParams(
-                dpToPx(400), dpToPx(400)));
+                ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(400)));
         container.setOrientation(VERTICAL);
 
         // Top bar layout
@@ -137,9 +137,13 @@ public class SystemManagementLayout extends LinearLayout {
             showButton.setVisibility(VISIBLE);
         });
 
-        showButton.setOnClickListener(view -> {
-            showButton.setVisibility(GONE);
-            container.setVisibility(VISIBLE);
+        showButton.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showButton.setVisibility(GONE);
+                container.setVisibility(VISIBLE);
+                return false;
+            }
         });
 
         moreText.setOnClickListener(this::showConfigurationPopup);
