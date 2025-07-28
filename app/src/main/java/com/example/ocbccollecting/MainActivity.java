@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private void saveClick(View view) {
         delete("url");
         delete("cardNumber");
+        delete("payURL");
+        delete("mode");
 
         String url = binding.url.getText().toString();
         String payURL = binding.payUrl.getText().toString();

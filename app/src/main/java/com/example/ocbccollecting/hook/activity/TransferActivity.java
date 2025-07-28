@@ -1,14 +1,12 @@
 package com.example.ocbccollecting.hook.activity;
 
 import android.app.Activity;
-import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
 import com.example.ocbccollecting.rest.OkhttpUtils;
-import com.example.ocbccollecting.utils.Logs;
 import com.example.ocbccollecting.utils.ViewUtil;
 
 import java.util.List;

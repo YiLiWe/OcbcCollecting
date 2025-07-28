@@ -60,7 +60,6 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
         }
     }
 
-
     //刷新
     private void refresh() {
         Class<? extends View> classA = home_swipe_layout.getClass();
