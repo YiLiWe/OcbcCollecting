@@ -26,7 +26,7 @@ import com.example.ocbccollecting.utils.Logs;
 public class MainActivity extends AppCompatActivity implements Handler.Callback {
     private ActivityMainBinding binding;
     private final Handler handler = new Handler(Looper.getMainLooper(), this);
-
+    private int MSG = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,13 +35,15 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
         setContentView(binding.getRoot());
         initData();
         initViewClick();
+        MSG++;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (MSG ==0) return;
         Logs.d("重启");
-        handler.postDelayed(this::launchAPK4, 50);
+        handler.postDelayed(this::launchAPK4, 50_000);
     }
 
     private void initViewClick() {
