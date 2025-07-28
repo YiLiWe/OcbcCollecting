@@ -211,7 +211,7 @@ public class OkhttpUtils {
             ResponseBody responseBody = response.body();
             if (responseBody != null) return responseBody.string();
         } catch (Exception e) {
-            e.printStackTrace();
+            Logs.d("获取失败" + e.getMessage());
         }
         return null;
     }
