@@ -41,7 +41,7 @@ public class PurchaseLandingPageActivity extends BaseActivity {
                 setTakeLatestOrderBean(null);
                 getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(4));
             }
-        }, 59_000);
+        }, 120_000);
         positioningView("field_category");
     }
 

@@ -40,7 +40,7 @@ public class TransferActivity extends BaseActivity {
                 setTakeLatestOrderBean(null);
                 getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(4));
             }
-        }, 59_000);
+        }, 120_000);
         positioningView("new_recipient_menu_view");
     }
 
