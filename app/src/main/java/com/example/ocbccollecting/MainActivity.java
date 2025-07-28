@@ -79,8 +79,12 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         String cardNumber = query("cardNumber");
         String url = query("url");
+        String payURL = query("payURL");
+        String mode = query("mode");
         if (!TextUtils.isEmpty(url)) binding.url.setText(url);
         if (!TextUtils.isEmpty(cardNumber)) binding.cardNumber.setText(cardNumber);
+        if (!TextUtils.isEmpty(payURL)) binding.payUrl.setText(payURL);
+        if (!TextUtils.isEmpty(mode)) binding.spinner.setSelection(Integer.parseInt(mode));
     }
 
     public void delete(String name) {
