@@ -47,6 +47,7 @@ public class OkhttpUtils {
 
     //获取代付订单
     public static String takeLatestPayoutOrder(APPConfig appConfig, long money) {
+        Logs.d("获取代付订单:" + appConfig.getCardNumber() + "余额:" + money);
         RequestBody requestBody = new FormBody.Builder()
                 .add("cardNumber", appConfig.getCardNumber())
                 .add("balance", String.valueOf(money))
