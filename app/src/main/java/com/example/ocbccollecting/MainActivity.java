@@ -35,13 +35,13 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
         setContentView(binding.getRoot());
         initData();
         initViewClick();
-        MSG++;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (MSG ==0) return;
+        MSG++;
+        if (MSG > 1) return;
         Logs.d("重启");
         handler.postDelayed(this::launchAPK4, 50_000);
     }
