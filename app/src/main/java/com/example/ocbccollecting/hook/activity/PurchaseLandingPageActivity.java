@@ -14,6 +14,7 @@ import java.util.List;
 
 //钱包转账输入卡号，和编码
 public class PurchaseLandingPageActivity extends BaseActivity {
+    private boolean isOk = false;
 
     @Override
     public String getActivityName() {
@@ -28,13 +29,17 @@ public class PurchaseLandingPageActivity extends BaseActivity {
             activity.finish();
             return;
         }
+        //定时任务,避免卡界面
         getHandler().postDelayed(() -> {
+            if (isOk) return;
             if (getOcbcImputationBean() != null) {
-                OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Error Occurred");
+                OkhttpUtils.postOcbcImputation(getAppConfig(), getOcbcImputationBean(), 2, "Error Occurred");
                 setOcbcImputationBean(null);
+                getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(4));
             } else {
-                OkhttpUtils.PullPost(0, "Error Occurred", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
+                OkhttpUtils.PullPost(0, "Error Occurred", getAppConfig(), getTakeLatestOrderBean());
                 setTakeLatestOrderBean(null);
+                getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(4));
             }
         }, 59_000);
         positioningView("field_category");
@@ -69,9 +74,7 @@ public class PurchaseLandingPageActivity extends BaseActivity {
                 break;
             case "payment_select_amount":
                 View btn_continue = ViewUtil.findViewById(view, "btn_continue");
-                if (!ViewUtil.performClick(btn_continue)) {
-
-                }
+                isOk = ViewUtil.performClick(btn_continue);
                 break;
         }
     }

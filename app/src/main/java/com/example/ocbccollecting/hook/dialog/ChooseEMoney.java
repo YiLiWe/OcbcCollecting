@@ -24,6 +24,7 @@ public class ChooseEMoney extends BaseDialog {
         super.onCreated(dialog);
         positioningView("list_selection_rv");
     }
+
     @SneakyThrows(Exception.class)
     private List<View> getBank(View view) {
         List<View> views = new ArrayList<>();
@@ -49,9 +50,16 @@ public class ChooseEMoney extends BaseDialog {
     private void selectBank(List<View> views) {
         views.forEach(view -> {
             TextView textView = ViewUtil.findViewById(view, "textView");
-            if (ViewUtil.equalsBank(textView, getOcbcImputationBean().getBank())) {
-                ViewUtil.performClick(view);
-                getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(89));
+            if (getOcbcImputationBean() != null) {
+                if (ViewUtil.equalsBank(textView, getOcbcImputationBean().getBank())) {
+                    ViewUtil.performClick(view);
+                    getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(89));
+                }
+            } else {
+                if (ViewUtil.equalsBank(textView, getTakeLatestOrderBean().getBankName())) {
+                    ViewUtil.performClick(view);
+                    getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(89));
+                }
             }
         });
     }

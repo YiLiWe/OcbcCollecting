@@ -14,6 +14,7 @@ import com.example.ocbccollecting.utils.ViewUtil;
 import java.util.List;
 
 public class TransferActivity extends BaseActivity {
+    private boolean isOk = false;
 
     @Override
     public String getActivityName() {
@@ -27,13 +28,17 @@ public class TransferActivity extends BaseActivity {
             activity.finish();
             return;
         }
+        //定时任务,避免卡界面
         getHandler().postDelayed(() -> {
+            if (isOk) return;
             if (getOcbcImputationBean() != null) {
                 OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Error Occurred");
                 setOcbcImputationBean(null);
+                getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(4));
             } else {
                 OkhttpUtils.PullPost(0, "Error Occurred", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
                 setTakeLatestOrderBean(null);
+                getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(4));
             }
         }, 59_000);
         positioningView("new_recipient_menu_view");
@@ -77,6 +82,7 @@ public class TransferActivity extends BaseActivity {
                 input_amount_root_constraint_layout(view);
                 break;
             case "base_frame_container":
+                isOk = true;//完成步骤，避免成功了，还提交
                 base_frame_container(view);
                 break;
         }

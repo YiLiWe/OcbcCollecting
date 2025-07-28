@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
-import com.example.ocbccollecting.task.bean.ImputationBeanOrder;
 import com.example.ocbccollecting.utils.Logs;
 import com.example.ocbccollecting.utils.ViewUtil;
 
@@ -67,12 +66,18 @@ public class SelectBankDialog extends BaseDialog {
     }
 
     private void selectBank(List<View> views) {
-        ImputationBeanOrder ocbcImputationBean = getOcbcImputationBean();
         views.forEach(view -> {
             TextView textView = ViewUtil.findViewById(view, "textView");
-            if (ViewUtil.equalsBank(textView, ocbcImputationBean.getBank())) {
-                ViewUtil.performClick(view);
-                getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(1));
+            if (getOcbcImputationBean() != null) {
+                if (ViewUtil.equalsBank(textView, getOcbcImputationBean().getBank())) {
+                    ViewUtil.performClick(view);
+                    getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(1));
+                }
+            } else {
+                if (ViewUtil.equalsBank(textView, getTakeLatestOrderBean().getBankName())) {
+                    ViewUtil.performClick(view);
+                    getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(1));
+                }
             }
         });
     }

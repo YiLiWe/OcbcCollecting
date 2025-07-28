@@ -53,9 +53,9 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
             startMainActivity();
         } else if (event.getCode() == 5) {//点击查看数据
             positioningView("navigation_home");
-        } else if (event.getCode() == 999) {
-            RunTransfer_menu();
         } else if (event.getCode() == 888) {
+            RunTransfer_menu();
+        } else if (event.getCode() == 999) {
             RunMenuRecycler();
         }
     }
@@ -156,9 +156,9 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
         TakeLatestOrderBean takeLatestOrderBean1 = getTakeLatestOrderBean();
         if (takeLatestOrderBean1 != null) {
             if (takeLatestOrderBean1.isMoney()) {//钱包转账
-                onMessageEvent(new MessageEvent(888));
-            } else {
                 onMessageEvent(new MessageEvent(999));
+            } else {
+                onMessageEvent(new MessageEvent(888));
             }
         }
     }
