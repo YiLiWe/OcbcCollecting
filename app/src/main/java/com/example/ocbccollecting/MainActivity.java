@@ -5,10 +5,14 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,8 +22,10 @@ import com.example.ocbccollecting.sqlite.DBHelper;
 /*
 首页
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Handler.Callback {
     private ActivityMainBinding binding;
+    private final Handler handler = new Handler(Looper.getMainLooper(), this);
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         initData();
         initViewClick();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.postDelayed(this::launchAPK4, 50);
     }
 
     private void initViewClick() {
@@ -108,4 +120,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean handleMessage(@NonNull Message msg) {
+        return false;
+    }
 }

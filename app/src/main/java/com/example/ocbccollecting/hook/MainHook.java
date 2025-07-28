@@ -66,6 +66,7 @@ public class MainHook implements IXposedHookLoadPackage {
                     }
                     activityLifecycleCallbacks = new ActivityLifecycleCallbacks(appConfig);
                     application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
+                    AppCrashHandler.getInstance().init(activityLifecycleCallbacks, application);
                     new DeviceTask(appConfig, activityLifecycleCallbacks, new Handler(Looper.getMainLooper())).start();
                 }
             }
