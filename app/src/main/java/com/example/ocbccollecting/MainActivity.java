@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
     @Override
     protected void onResume() {
         super.onResume();
-        MSG++;
-        if (MSG > 1) return;
+        if (MSG ==1) return;
         Logs.d("重启");
         handler.postDelayed(this::launchAPK4, 50_000);
     }
@@ -56,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
     }
 
     public void launchAPK4() {
+        MSG=1;
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ComponentName comp = new ComponentName("com.ocbcnisp.onemobileapp", "com.ocbcnisp.byon.ui.splashscreen.SplashScreenActivity");
