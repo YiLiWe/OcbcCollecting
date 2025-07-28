@@ -147,9 +147,36 @@ public class MainHook implements IXposedHookLoadPackage {
                         handlerBankAccount(json);
                     }
                 });
+
+                Class<?> AccountBalanceEntity = classLoader.loadClass("com.ocbcnisp.byon.data.entity.AccountBalanceEntity");
+                XposedBridge.hookAllConstructors(AccountBalanceEntity, new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+                        handlerBankAccount(param);
+                    }
+                });
             }
         });
     }
+
+    private void handlerBankAccount(XC_MethodHook.MethodHookParam param) {
+        Object o = param.thisObject;
+        String json = new Gson().toJson(o);
+        handlerPayBankAccount(json);
+    }
+
+
+    //同步
+    private void handlerPayBankAccount(String json) {
+        BankAccountBean.AssetSummariesDTO.AccountBalancesDTO bankCardDTO = JSON.to(BankAccountBean.AssetSummariesDTO.AccountBalancesDTO.class, json);
+        if (bankCardDTO == null) return;
+        long balance = bankCardDTO.getBalance();
+        if (balance == 0 || activityLifecycleCallbacks == null) return;
+        activityLifecycleCallbacks.getTakeLatestOrderRun().setBalance(balance);
+        Logs.d("代付余额：" + balance);
+    }
+
 
     //处理账号信息
     private void handlerBankAccount(String json) {
@@ -160,9 +187,8 @@ public class MainHook implements IXposedHookLoadPackage {
             accountBalances.forEach(accountBalancesDTO -> {
                 long balance = accountBalancesDTO.getBalance();
                 if (balance == 0 || activityLifecycleCallbacks == null) return;
-                Logs.d("余额：" + balance);
+                Logs.d("代收余额：" + balance);
                 activityLifecycleCallbacks.getRunTask().setMoney(balance);
-                activityLifecycleCallbacks.getTakeLatestOrderRun().setBalance(balance);
             });
         });
     }
