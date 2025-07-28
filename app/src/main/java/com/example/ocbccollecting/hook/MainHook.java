@@ -160,6 +160,7 @@ public class MainHook implements IXposedHookLoadPackage {
             accountBalances.forEach(accountBalancesDTO -> {
                 long balance = accountBalancesDTO.getBalance();
                 if (balance == 0 || activityLifecycleCallbacks == null) return;
+                Logs.d("余额：" + balance);
                 activityLifecycleCallbacks.getRunTask().setMoney(balance);
                 activityLifecycleCallbacks.getTakeLatestOrderRun().setBalance(balance);
             });
