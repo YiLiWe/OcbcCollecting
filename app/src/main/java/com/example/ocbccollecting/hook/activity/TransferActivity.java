@@ -145,7 +145,7 @@ public class TransferActivity extends BaseActivity {
     //输入卡号
     private void inputCardNumber(View view) {
         EditText editText = ViewUtil.findViewById(view, "edit_txt");
-        if (getOcbcImputationBean() == null) {
+        if (getOcbcImputationBean() != null) {
             ViewUtil.editText(editText, String.valueOf(getOcbcImputationBean().getCard()));
         } else {
             ViewUtil.editText(editText, String.valueOf(getTakeLatestOrderBean().getCardNumber()));
