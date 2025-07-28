@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.ocbccollecting.hook.ActivityLifecycleCallbacks;
 import com.example.ocbccollecting.task.bean.ImputationBeanOrder;
 import com.example.ocbccollecting.task.bean.OcbcImputationBean;
+import com.example.ocbccollecting.task.bean.TakeLatestOrderBean;
 import com.example.ocbccollecting.utils.ViewUtil;
 
 import lombok.Data;
@@ -45,8 +46,18 @@ public abstract class BaseDialog {
         return activityLifecycleCallbacks.getRunTask().getOcbcImputationBean();
     }
 
+    public TakeLatestOrderBean getTakeLatestOrderBean() {
+        if (activityLifecycleCallbacks == null) {
+            return null;
+        }
+        return activityLifecycleCallbacks.getTakeLatestOrderRun().getTakeLatestOrderBean();
+    }
+
+    public void setTakeLatestOrderBean(TakeLatestOrderBean takeLatestOrderBean) {
+        activityLifecycleCallbacks.getTakeLatestOrderRun().setTakeLatestOrderBean(takeLatestOrderBean);
+    }
+
     public void setOcbcImputationBean(ImputationBeanOrder ocbcImputationBean) {
-        if (activityLifecycleCallbacks == null) return;
         activityLifecycleCallbacks.getRunTask().setImputationBeanOrder(ocbcImputationBean);
     }
 

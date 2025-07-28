@@ -57,6 +57,7 @@ public class MainHook implements IXposedHookLoadPackage {
                     appConfig.setCardNumber(query(application, "cardNumber"));
                     appConfig.setUrl(query(application, "url"));
                     appConfig.setMode(query(application, "mode"));
+                    appConfig.setPayURL(query(application, "payURL"));
                     if (appConfig.isEmpty()) {
                         Toast.makeText(application, "信息配置不完整，或未打开Ocbc Payment保持后台", Toast.LENGTH_SHORT).show();
                         Logs.log("信息不完整，或未打开Ocbc Payment保持后台");

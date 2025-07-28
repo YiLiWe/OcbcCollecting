@@ -9,10 +9,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:hint="后台地址">
+        android:hint="归集后台地址">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="https://mocbank.bt-mange.site/" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="代付后台地址">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pay_url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="https://mocbank.bt-mange.site/" />

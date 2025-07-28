@@ -15,8 +15,13 @@ public class AccountNotFoundDialog extends BaseDialog {
     @Override
     public void onCreated(Dialog dialog) {
         super.onCreated(dialog);
-        OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Account Not Found");
-        setOcbcImputationBean(null);
+        if (getOcbcImputationBean() != null) {
+            OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Account Not Found");
+            setOcbcImputationBean(null);
+        } else {
+            OkhttpUtils.PullPost(2, "Account Not Found", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
+            setTakeLatestOrderBean(null);
+        }
         getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(2));
         dialog.dismiss();
     }

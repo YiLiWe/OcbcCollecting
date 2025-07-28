@@ -70,9 +70,9 @@ public class PurchaseLandingPageActivity extends BaseActivity {
     private void amount_input_edit_text(View view) {
         if (view instanceof EditText editText) {
             editText.post(() -> {
-                if (getOcbcImputationBean()!=null) {
+                if (getOcbcImputationBean() != null) {
                     editText.setText(String.valueOf(getOcbcImputationBean().getAmount()));
-                }else {
+                } else {
                     editText.setText(String.valueOf(getTakeLatestOrderBean().getAmount()));
                 }
                 getHandler().postDelayed(() -> positioningView("payment_select_amount"), 3000);

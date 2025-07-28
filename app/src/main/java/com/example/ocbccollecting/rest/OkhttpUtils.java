@@ -55,7 +55,7 @@ public class OkhttpUtils {
                 .build();
         Request request = new Request.Builder()
                 .post(requestBody)
-                .url(appConfig.getUrl() + "app/takeLatestPayoutOrder")
+                .url(appConfig.getPayURL() + "app/takeLatestPayoutOrder")
                 .build();
         return OkhttpUtils.result(request);
     }
@@ -152,7 +152,7 @@ public class OkhttpUtils {
         requestBody.add("orderNo", transferBean.getOrderNo());
         Request request = new Request.Builder()
                 .post(requestBody.build())
-                .url(appConfig.getUrl() + "app/payoutOrderCallback")
+                .url(appConfig.getPayURL() + "app/payoutOrderCallback")
                 .build();
         OkHttpClient client = new OkHttpClient();
         client.newCall(request).enqueue(new Callback(transferBean, state, error, appConfig));

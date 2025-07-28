@@ -49,14 +49,16 @@ public class MainActivity extends AppCompatActivity {
         delete("cardNumber");
 
         String url = binding.url.getText().toString();
+        String payURL = binding.payUrl.getText().toString();
         String cardNumber = binding.cardNumber.getText().toString();
         int selectedItemPosition = binding.spinner.getSelectedItemPosition();
-        if (TextUtils.isEmpty(url) || TextUtils.isEmpty(cardNumber)) {
+        if (TextUtils.isEmpty(url) || TextUtils.isEmpty(cardNumber) || TextUtils.isEmpty(payURL)) {
             Toast.makeText(this, "输入不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
         save(getContentValues("mode", selectedItemPosition + ""));
         save(getContentValues("url", url));
+        save(getContentValues("payURL", payURL));
         save(getContentValues("cardNumber", cardNumber));
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
     }
