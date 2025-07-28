@@ -120,7 +120,7 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
      * @return true=是代收 false=是归集
      */
     public boolean isPayMode() {
-        return getAppConfig().getMode().equals("0");
+        return getAppConfig().getMode().equals("1");
     }
 
     @Override
