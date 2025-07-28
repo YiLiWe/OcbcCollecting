@@ -155,6 +155,7 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
             if (!baseActivity.getActivityName().equals("com.ocbcnisp.byon.ui.dashboard.DashboardActivity")) {
                 if (messageEvent.getCode() == 4) {
                     baseActivity.finish();
+                    return;
                 }
             }
             baseActivity.onMessageEvent(messageEvent);

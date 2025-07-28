@@ -142,14 +142,8 @@ public class TransferActivity extends BaseActivity {
     public void onMessageEvent(MessageEvent event) {
         if (event.getCode() == 1) {
             positioningView("recipient_account_number_field");
-        } else if (event.getCode() == 2) {
-            if (getOcbcImputationBean() == null && getTakeLatestOrderBean() == null) {
-                getActivity().finish();
-            }
         } else if (event.getCode() == 3) {
             positioningView("input_amount_root_constraint_layout");
-        } else if (event.getCode() == 4) {
-            getActivity().finish();
         } else if (event.getCode() == 89) {
             positioningView("input_amount_root_constraint_layout");
         }

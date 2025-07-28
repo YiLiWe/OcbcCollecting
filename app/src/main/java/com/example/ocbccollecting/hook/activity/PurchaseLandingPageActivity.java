@@ -101,9 +101,7 @@ public class PurchaseLandingPageActivity extends BaseActivity {
 
     @Override
     public void onMessageEvent(MessageEvent event) {
-        if (event.getCode() == 2) {
-            getActivity().finish();
-        } else if (event.getCode() == 89) {
+        if (event.getCode() == 89) {
             positioningView("field_rev_no");
         }
     }

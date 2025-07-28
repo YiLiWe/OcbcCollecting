@@ -23,8 +23,6 @@ public class SavingAccountHoldingActivity extends BaseActivity {
     public void onMessageEvent(MessageEvent event) {
         if (event.getCode() == 0) {
             getHandler().postDelayed(this::finish, 5_000);
-        } else if (event.getCode() == 4) {
-            getActivity().finish();
         }
     }
 

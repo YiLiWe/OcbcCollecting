@@ -22,7 +22,7 @@ public class AccountNotFoundDialog extends BaseDialog {
             OkhttpUtils.PullPost(2, "Account Not Found", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
             setTakeLatestOrderBean(null);
         }
-        getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(2));
+        getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(4));
         dialog.dismiss();
     }
 
