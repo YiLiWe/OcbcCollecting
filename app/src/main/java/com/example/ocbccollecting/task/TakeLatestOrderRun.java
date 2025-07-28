@@ -42,6 +42,7 @@ public class TakeLatestOrderRun implements Runnable {
     public void start() {
         if (this.activityLifecycleCallbacksX.getAppConfig().getMode().equals("0")) return;
         if (getRun()) return;
+        Logs.d("开始获取代付订单");
         scheduler.scheduleWithFixedDelay(this, 20, 20, TimeUnit.SECONDS);
         setRun(true);
     }
@@ -77,6 +78,7 @@ public class TakeLatestOrderRun implements Runnable {
     public TakeLatestOrderBean getOrder() {
         String text = OkhttpUtils.takeLatestPayoutOrder(activityLifecycleCallbacksX.getAppConfig(), getBalance());
         if (text == null) return null;
+        Logs.d(text);
         MessageBean messageBean = JSON.to(MessageBean.class, text);
         if (messageBean == null) return null;
         if (messageBean.getData() == null) return null;
