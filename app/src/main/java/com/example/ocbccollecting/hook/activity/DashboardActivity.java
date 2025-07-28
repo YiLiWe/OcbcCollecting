@@ -114,10 +114,12 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
     @Override
     public void onResumed(Activity activity) {
         super.onResumed(activity);
-        if (getActivityLifecycleCallbacks().isPayMode()) {
-            positioningView("home_swipe_layout");
+        if (getOcbcImputationBean() != null || getTakeLatestOrderBean() != null) {
+            positioningView("navigation_home");
         } else {
-            positioningView("navigation_finance");
+            if (!getActivityLifecycleCallbacks().isPayMode()) {
+                positioningView("navigation_finance", 10_000);
+            }
         }
     }
 
