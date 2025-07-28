@@ -3,13 +3,11 @@ package com.example.ocbccollecting.hook.dialog;
 import android.app.Dialog;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
 import com.example.ocbccollecting.task.bean.ImputationBeanOrder;
-import com.example.ocbccollecting.task.bean.OcbcImputationBean;
 import com.example.ocbccollecting.utils.Logs;
 import com.example.ocbccollecting.utils.ViewUtil;
 

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
-
 import com.example.ocbccollecting.task.bean.TakeLatestOrderBean;
 import com.example.ocbccollecting.utils.ViewUtil;
 

@@ -1,13 +1,11 @@
 package com.example.ocbccollecting.rest;
 
 import android.icu.text.SimpleDateFormat;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.example.ocbccollecting.hook.ActivityLifecycleCallbacks;
 import com.example.ocbccollecting.hook.bean.APPConfig;
 import com.example.ocbccollecting.hook.bean.ReceiptBean;
 import com.example.ocbccollecting.hook.entity.OnlineTransactionEntity;

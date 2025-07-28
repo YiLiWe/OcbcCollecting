@@ -14,12 +14,8 @@ import com.example.ocbccollecting.eventbus.event.MessageEvent;
 import com.example.ocbccollecting.hook.ActivityLifecycleCallbacks;
 import com.example.ocbccollecting.hook.bean.APPConfig;
 import com.example.ocbccollecting.task.bean.ImputationBeanOrder;
-import com.example.ocbccollecting.task.bean.OcbcImputationBean;
 import com.example.ocbccollecting.task.bean.TakeLatestOrderBean;
 import com.example.ocbccollecting.utils.ViewUtil;
-
-
-import java.util.Timer;
 
 import lombok.Data;
 

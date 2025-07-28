@@ -4,7 +4,6 @@ import android.app.Dialog;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
 import com.example.ocbccollecting.rest.OkhttpUtils;
-import com.example.ocbccollecting.utils.Logs;
 
 //加载信息失败
 public class LoadingFailedDialog extends BaseDialog {

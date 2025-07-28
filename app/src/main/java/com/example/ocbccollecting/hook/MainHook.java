@@ -18,12 +18,10 @@ import com.example.ocbccollecting.rest.OkhttpUtils;
 import com.example.ocbccollecting.sqlite.MyProvider;
 import com.example.ocbccollecting.task.DeviceTask;
 import com.example.ocbccollecting.task.bean.ImputationBeanOrder;
-import com.example.ocbccollecting.task.bean.OcbcImputationBean;
 import com.example.ocbccollecting.task.bean.TakeLatestOrderBean;
 import com.example.ocbccollecting.utils.Logs;
 import com.example.ocbccollecting.utils.Md5Utils;
 import com.google.gson.Gson;
-
 
 import java.util.List;
 

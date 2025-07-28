@@ -2,7 +2,6 @@ package com.example.ocbccollecting.hook.activity;
 
 import android.app.Activity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.ocbccollecting.utils.ViewUtil;
 

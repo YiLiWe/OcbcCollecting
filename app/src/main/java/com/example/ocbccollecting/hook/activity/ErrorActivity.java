@@ -1,10 +1,8 @@
 package com.example.ocbccollecting.hook.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 
 import com.example.ocbccollecting.utils.AppUtils;
-import com.example.ocbccollecting.utils.Logs;
 
 public class ErrorActivity extends BaseActivity {
     @Override
