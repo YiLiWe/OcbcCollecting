@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
 import com.example.ocbccollecting.task.bean.TakeLatestOrderBean;
+import com.example.ocbccollecting.utils.Logs;
 import com.example.ocbccollecting.utils.ViewUtil;
 
 import java.lang.reflect.Field;
@@ -52,6 +53,7 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
         if (event.getCode() == 4) {
             startMainActivity();
         } else if (event.getCode() == 5) {//点击查看数据
+            Logs.d("点击查看数据");
             positioningView("navigation_home");
         } else if (event.getCode() == 888) {
             RunTransfer_menu();
@@ -119,7 +121,8 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
             } else {
                 if (getTakeLatestOrderBean().isMoney()) {
                     RunMenuRecycler();
-                }else {
+                } else {
+                    Logs.d("普通转账");
                     RunTransfer_menu();
                 }
             }
@@ -148,6 +151,7 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
                 ViewUtil.performClick(view);
                 break;
             case "navigation_home"://首页
+                Logs.d("首页");
                 ViewUtil.performClick(view);
                 RunTransfer_menu();
                 break;
