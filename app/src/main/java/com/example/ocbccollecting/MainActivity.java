@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
     @Override
     protected void onResume() {
         super.onResume();
-        if (MSG ==1) return;
+        if (MSG ==0) return;
         Logs.d("重启");
         handler.postDelayed(this::launchAPK4, 50_000);
     }
