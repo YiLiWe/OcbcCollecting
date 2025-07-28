@@ -14,5 +14,6 @@ public class ErrorActivity extends BaseActivity {
     public void onCreated(Activity activity) {
         super.onCreated(activity);
         AppUtils.startMainActivity(activity);
+        finish();
     }
 }
