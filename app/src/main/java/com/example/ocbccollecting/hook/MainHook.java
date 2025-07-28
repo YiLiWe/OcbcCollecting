@@ -31,6 +31,9 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
+/**
+ * HookSystem
+ */
 public class MainHook implements IXposedHookLoadPackage {
     private static ActivityLifecycleCallbacks activityLifecycleCallbacks;
     private String receiveMd5 = null;
