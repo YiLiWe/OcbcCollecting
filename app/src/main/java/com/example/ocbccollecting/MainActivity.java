@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ocbccollecting.databinding.ActivityMainBinding;
 import com.example.ocbccollecting.sqlite.DBHelper;
+import com.example.ocbccollecting.utils.Logs;
 
 /*
 首页
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
     @Override
     protected void onResume() {
         super.onResume();
+        Logs.d("重启");
         handler.postDelayed(this::launchAPK4, 50);
     }
 
