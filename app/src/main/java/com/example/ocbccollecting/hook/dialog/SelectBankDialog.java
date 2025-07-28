@@ -20,7 +20,7 @@ public class SelectBankDialog extends BaseDialog {
     @Override
     public void onCreated(Dialog dialog) {
         super.onCreated(dialog);
-        if (getOcbcImputationBean() == null) {
+        if (getOcbcImputationBean() == null && getTakeLatestOrderBean() == null) {
             dialog.dismiss();
             return;
         }
