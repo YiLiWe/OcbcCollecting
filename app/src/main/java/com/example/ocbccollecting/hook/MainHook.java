@@ -178,7 +178,7 @@ public class MainHook implements IXposedHookLoadPackage {
                 if (listTransactionDTO.getTransactionStatus().equals("S")) {
                     OkhttpUtils.PullPost(1, "Transaction Successful", activityLifecycleCallbacks.getAppConfig(), takeLatestOrderBean);
                 } else {
-                    OkhttpUtils.PullPost(0, "未知原因", activityLifecycleCallbacks.getAppConfig(), takeLatestOrderBean);
+                    OkhttpUtils.PullPost(0, "支付界面，支付失败,可能成功", activityLifecycleCallbacks.getAppConfig(), takeLatestOrderBean);
                 }
                 activityLifecycleCallbacks.getTakeLatestOrderRun().setBalance(0);
                 activityLifecycleCallbacks.getTakeLatestOrderRun().setTakeLatestOrderBean(null);

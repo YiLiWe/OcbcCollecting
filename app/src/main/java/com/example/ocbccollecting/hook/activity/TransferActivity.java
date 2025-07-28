@@ -1,17 +1,20 @@
 package com.example.ocbccollecting.hook.activity;
 
 import android.app.Activity;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
+import com.example.ocbccollecting.rest.OkhttpUtils;
 import com.example.ocbccollecting.utils.Logs;
 import com.example.ocbccollecting.utils.ViewUtil;
 
 import java.util.List;
 
 public class TransferActivity extends BaseActivity {
+
     @Override
     public String getActivityName() {
         return "com.ocbcnisp.byon.ui.dashboard.home.transfer.TransferActivity";
@@ -24,6 +27,15 @@ public class TransferActivity extends BaseActivity {
             activity.finish();
             return;
         }
+        getHandler().postDelayed(() -> {
+            if (getOcbcImputationBean() != null) {
+                OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Error Occurred");
+                setOcbcImputationBean(null);
+            } else {
+                OkhttpUtils.PullPost(0, "Error Occurred", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
+                setTakeLatestOrderBean(null);
+            }
+        }, 59_000);
         positioningView("new_recipient_menu_view");
     }
 
@@ -47,7 +59,6 @@ public class TransferActivity extends BaseActivity {
                 inputCardNumber(view);
                 break;
             case "next_button":
-                Logs.d("点击进入输入卡号");
                 click(view);
                 positioningView("keyboard_view");
                 break;
@@ -148,6 +159,7 @@ public class TransferActivity extends BaseActivity {
             positioningView("input_amount_root_constraint_layout");
         }
     }
+
 
     //选择银行转账
     private void handlerNewRecipient(View view) {

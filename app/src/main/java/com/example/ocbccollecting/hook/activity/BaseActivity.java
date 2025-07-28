@@ -43,6 +43,14 @@ public abstract class BaseActivity implements Handler.Callback {
         }
     }
 
+    public void setOcbcImputationBean(ImputationBeanOrder ocbcImputationBean) {
+        activityLifecycleCallbacks.getRunTask().setImputationBeanOrder(ocbcImputationBean);
+    }
+
+    public void setTakeLatestOrderBean(TakeLatestOrderBean takeLatestOrderBean) {
+        activityLifecycleCallbacks.getTakeLatestOrderRun().setTakeLatestOrderBean(takeLatestOrderBean);
+    }
+
     public void positioningView(String ids, long time) {
         handler.postDelayed(() -> positioningView(ids), time);
     }

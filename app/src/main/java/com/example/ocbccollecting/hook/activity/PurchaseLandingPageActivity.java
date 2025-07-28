@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
+import com.example.ocbccollecting.rest.OkhttpUtils;
 import com.example.ocbccollecting.utils.ViewUtil;
 
 import java.util.List;
@@ -27,6 +28,15 @@ public class PurchaseLandingPageActivity extends BaseActivity {
             activity.finish();
             return;
         }
+        getHandler().postDelayed(() -> {
+            if (getOcbcImputationBean() != null) {
+                OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Error Occurred");
+                setOcbcImputationBean(null);
+            } else {
+                OkhttpUtils.PullPost(0, "Error Occurred", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
+                setTakeLatestOrderBean(null);
+            }
+        }, 59_000);
         positioningView("field_category");
     }
 

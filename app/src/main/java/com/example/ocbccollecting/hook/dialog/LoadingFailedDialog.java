@@ -19,7 +19,7 @@ public class LoadingFailedDialog extends BaseDialog {
             OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Account Not Found");
             setOcbcImputationBean(null);
         } else {
-            OkhttpUtils.PullPost(2, "Account Not Found", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
+            OkhttpUtils.PullPost(0, "Loading Failed", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
             setTakeLatestOrderBean(null);
         }
         dialog.dismiss();

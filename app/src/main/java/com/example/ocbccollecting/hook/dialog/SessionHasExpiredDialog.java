@@ -15,10 +15,10 @@ public class SessionHasExpiredDialog extends BaseDialog {
     public void onCreated(Dialog dialog) {
         super.onCreated(dialog);
         if (getOcbcImputationBean() != null) {
-            OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Account Not Found");
+            OkhttpUtils.postOcbcImputation(getActivityLifecycleCallbacks().getAppConfig(), getOcbcImputationBean(), 2, "Session Has Expired");
             setOcbcImputationBean(null);
         } else {
-            OkhttpUtils.PullPost(2, "Account Not Found", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
+            OkhttpUtils.PullPost(0, "Session Has Expired", getActivityLifecycleCallbacks().getAppConfig(), getTakeLatestOrderBean());
             setTakeLatestOrderBean(null);
         }
         getActivityLifecycleCallbacks().onMessageEvent(new MessageEvent(4));
