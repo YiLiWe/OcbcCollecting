@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ocbccollecting.databinding.ActivityMainBinding;
 import com.example.ocbccollecting.sqlite.DBHelper;
 
+/*
+首页
+ */
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
