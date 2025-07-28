@@ -23,4 +23,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "OcbcCollecting"
 include ':app'
-include ':FloatWindow'

@@ -4,4 +4,8 @@
         <item>com.ocbcnisp.onemobileapp</item>
         <item>com.samsung.android.cidmanager</item>
     </string-array>
+    <string-array name="modes">
+        <item>代收/归集</item>
+        <item>代付</item>
+    </string-array>
 </resources>

@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
-import com.example.ocbccollecting.floatWindow.FloatWindowX;
 import com.example.ocbccollecting.hook.activity.BaseActivity;
 import com.example.ocbccollecting.hook.activity.DashboardActivity;
 import com.example.ocbccollecting.hook.activity.ErrorActivity;
@@ -17,6 +16,8 @@ import com.example.ocbccollecting.hook.activity.LoginActivity;
 import com.example.ocbccollecting.hook.activity.N23Activity;
 import com.example.ocbccollecting.hook.activity.PinTransactionActivity;
 import com.example.ocbccollecting.hook.activity.PreLoginActivity;
+import com.example.ocbccollecting.hook.activity.PurchaseLandingPageActivity;
+import com.example.ocbccollecting.hook.activity.PurchaseSummaryActivity;
 import com.example.ocbccollecting.hook.activity.ReceiptTransactionActivity;
 import com.example.ocbccollecting.hook.activity.SavingAccountHoldingActivity;
 import com.example.ocbccollecting.hook.activity.TransferActivity;
@@ -24,6 +25,7 @@ import com.example.ocbccollecting.hook.activity.WebViewActivity;
 import com.example.ocbccollecting.hook.bean.APPConfig;
 import com.example.ocbccollecting.hook.dialog.HookDialog;
 import com.example.ocbccollecting.task.RunTask;
+import com.example.ocbccollecting.task.TakeLatestOrderRun;
 import com.example.ocbccollecting.task.bean.DeviceBean;
 import com.example.ocbccollecting.utils.Logs;
 
@@ -39,6 +41,7 @@ import lombok.Setter;
 @Setter
 public class ActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
     private final RunTask runTask;
+    private final TakeLatestOrderRun takeLatestOrderRun;
     private final APPConfig appConfig;
     private DeviceBean deviceBean;
     private final List<BaseActivity> activities = new ArrayList<>() {
@@ -53,6 +56,8 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
             add(new ReceiptTransactionActivity());
             add(new WebViewActivity());
             add(new N23Activity());
+            add(new PurchaseSummaryActivity());
+            add(new PurchaseLandingPageActivity());
         }
     };
 
@@ -70,11 +75,11 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
             }
         });
         this.runTask = new RunTask(this);
+        this.takeLatestOrderRun = new TakeLatestOrderRun(this);
     }
 
     @Override
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
-        FloatWindowX.getInstance(activity);
         activities.forEach(baseActivity -> {
             if (baseActivity.isActivity(activity)) {
                 BaseActivity baseActivity1 = newInstance(baseActivity.getClass());
@@ -109,6 +114,15 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
         });
     }
 
+    /**
+     * 判断是否是代收
+     *
+     * @return true=是代收 false=是归集
+     */
+    public boolean isPayMode() {
+        return getAppConfig().getMode().equals("0");
+    }
+
     @Override
     public void onActivityPaused(@NonNull Activity activity) {
 
@@ -136,6 +150,14 @@ public class ActivityLifecycleCallbacks implements Application.ActivityLifecycle
     }
 
     public void onMessageEvent(MessageEvent messageEvent) {
-        RunActivities.forEach(baseActivity -> baseActivity.onMessageEvent(messageEvent));
+        RunActivities.forEach(baseActivity -> {
+            //登录失效
+            if (!baseActivity.getActivityName().equals("com.ocbcnisp.byon.ui.dashboard.DashboardActivity")) {
+                if (messageEvent.getCode() == 4) {
+                    baseActivity.finish();
+                }
+            }
+            baseActivity.onMessageEvent(messageEvent);
+        });
     }
 }

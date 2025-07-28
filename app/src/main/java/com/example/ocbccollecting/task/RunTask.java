@@ -31,6 +31,7 @@ public class RunTask implements Runnable {
     }
 
     public void start() {
+        if (appConfig.getMode().equals("1")) return;
         if (getRun()) return;
         scheduler.scheduleWithFixedDelay(this, 20, 20, TimeUnit.SECONDS);
         setRun(true);

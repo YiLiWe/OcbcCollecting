@@ -20,7 +20,7 @@ public class TransferActivity extends BaseActivity {
     @Override
     public void onCreated(Activity activity) {
         super.onCreated(activity);
-        if (getOcbcImputationBean() == null) {
+        if (getOcbcImputationBean() == null && getTakeLatestOrderBean() == null) {
             activity.finish();
             return;
         }
@@ -53,7 +53,6 @@ public class TransferActivity extends BaseActivity {
                 break;
             case "keyboard_view":
                 keyboard_viewGone();
-                Logs.d("隐藏输入按键：" + view.getVisibility());
                 positioningView("input_amount_edit_text");
                 break;
             case "input_amount_edit_text":
@@ -119,7 +118,11 @@ public class TransferActivity extends BaseActivity {
     //输入金额
     private void inputMoney(View view) {
         if (view instanceof EditText editText) {
-            ViewUtil.editText(editText, String.valueOf(getOcbcImputationBean().getAmount()));
+            if (getOcbcImputationBean() != null) {
+                ViewUtil.editText(editText, String.valueOf(getOcbcImputationBean().getAmount()));
+            } else {
+                ViewUtil.editText(editText, String.valueOf(getTakeLatestOrderBean().getAmount()));
+            }
             positioningView("transfer_purpose_field");
         }
     }
@@ -127,7 +130,11 @@ public class TransferActivity extends BaseActivity {
     //输入卡号
     private void inputCardNumber(View view) {
         EditText editText = ViewUtil.findViewById(view, "edit_txt");
-        ViewUtil.editText(editText, String.valueOf(getOcbcImputationBean().getCard()));
+        if (getOcbcImputationBean() == null) {
+            ViewUtil.editText(editText, String.valueOf(getOcbcImputationBean().getCard()));
+        } else {
+            ViewUtil.editText(editText, String.valueOf(getTakeLatestOrderBean().getCardNumber()));
+        }
         positioningView("next_button");
     }
 
@@ -136,13 +143,15 @@ public class TransferActivity extends BaseActivity {
         if (event.getCode() == 1) {
             positioningView("recipient_account_number_field");
         } else if (event.getCode() == 2) {
-            if (getOcbcImputationBean() == null) {
+            if (getOcbcImputationBean() == null && getTakeLatestOrderBean() == null) {
                 getActivity().finish();
             }
         } else if (event.getCode() == 3) {
             positioningView("input_amount_root_constraint_layout");
         } else if (event.getCode() == 4) {
             getActivity().finish();
+        } else if (event.getCode() == 89) {
+            positioningView("input_amount_root_constraint_layout");
         }
     }
 

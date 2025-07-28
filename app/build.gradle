@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-    implementation project(':FloatWindow')
 
     implementation libs.lombok
     annotationProcessor libs.lombok

@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         initData();
         initViewClick();
     }
+
     private void initViewClick() {
         binding.open.setOnClickListener(this::openClick);
         binding.save.setOnClickListener(this::saveClick);
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         launchAPK4();
     }
 
-    public  void launchAPK4() {
+    public void launchAPK4() {
         Intent intent = new Intent();
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ComponentName comp = new ComponentName("com.ocbcnisp.onemobileapp", "com.ocbcnisp.byon.ui.splashscreen.SplashScreenActivity");
@@ -49,12 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
         String url = binding.url.getText().toString();
         String cardNumber = binding.cardNumber.getText().toString();
-
-        if (TextUtils.isEmpty(url) || TextUtils.isEmpty(cardNumber) ) {
+        int selectedItemPosition = binding.spinner.getSelectedItemPosition();
+        if (TextUtils.isEmpty(url) || TextUtils.isEmpty(cardNumber)) {
             Toast.makeText(this, "输入不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        save(getContentValues("mode", selectedItemPosition + ""));
         save(getContentValues("url", url));
         save(getContentValues("cardNumber", cardNumber));
         Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();

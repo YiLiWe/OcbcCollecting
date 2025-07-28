@@ -21,6 +21,7 @@ public class HookDialog {
         add(new LoadingFailedDialog());
         add(new ChooseSourceDialog());
         add(new SessionHasExpiredDialog());
+        add(new ChooseEMoney());
     }};
 
     public HookDialog(Dialog dialog, ActivityLifecycleCallbacks activityLifecycleCallbacks) {

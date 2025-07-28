@@ -10,6 +10,7 @@ public class APPConfig {
     private String url;//后台地址
     private String cardNumber;//卡号
     private Context context;//上下文
+    private String mode;//模式 0=代收归集 1=代付
 
     public boolean isData() {
         return !TextUtils.isEmpty(url) && !TextUtils.isEmpty(cardNumber);

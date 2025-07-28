@@ -19,6 +19,7 @@ import com.example.ocbccollecting.sqlite.MyProvider;
 import com.example.ocbccollecting.task.DeviceTask;
 import com.example.ocbccollecting.task.bean.ImputationBeanOrder;
 import com.example.ocbccollecting.task.bean.OcbcImputationBean;
+import com.example.ocbccollecting.task.bean.TakeLatestOrderBean;
 import com.example.ocbccollecting.utils.Logs;
 import com.example.ocbccollecting.utils.Md5Utils;
 import com.google.gson.Gson;
@@ -55,6 +56,7 @@ public class MainHook implements IXposedHookLoadPackage {
                     appConfig.setContext(application.getApplicationContext());
                     appConfig.setCardNumber(query(application, "cardNumber"));
                     appConfig.setUrl(query(application, "url"));
+                    appConfig.setMode(query(application, "mode"));
                     if (appConfig.isEmpty()) {
                         Toast.makeText(application, "信息配置不完整，或未打开Ocbc Payment保持后台", Toast.LENGTH_SHORT).show();
                         Logs.log("信息不完整，或未打开Ocbc Payment保持后台");
@@ -62,7 +64,7 @@ public class MainHook implements IXposedHookLoadPackage {
                     }
                     activityLifecycleCallbacks = new ActivityLifecycleCallbacks(appConfig);
                     application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
-                    new DeviceTask(appConfig, activityLifecycleCallbacks,new Handler(Looper.getMainLooper())).start();
+                    new DeviceTask(appConfig, activityLifecycleCallbacks, new Handler(Looper.getMainLooper())).start();
                 }
             }
         });
@@ -167,8 +169,21 @@ public class MainHook implements IXposedHookLoadPackage {
         List<ReceiptBean.ListTransactionDTO> listTransaction = receiptBean.getListTransaction();
         listTransaction.forEach(listTransactionDTO -> {
             ImputationBeanOrder ocbcImputationBean = activityLifecycleCallbacks.getRunTask().getOcbcImputationBean();
-            if (ocbcImputationBean == null) return;
-            OkhttpUtils.postOcbcImputation(activityLifecycleCallbacks.getAppConfig(), ocbcImputationBean, 1, null);
+            TakeLatestOrderBean takeLatestOrderBean = activityLifecycleCallbacks.getTakeLatestOrderRun().getTakeLatestOrderBean();
+            if (ocbcImputationBean == null && takeLatestOrderBean == null) return;
+            if (ocbcImputationBean != null) {
+                OkhttpUtils.postOcbcImputation(activityLifecycleCallbacks.getAppConfig(), ocbcImputationBean, 1, null);
+                activityLifecycleCallbacks.getRunTask().setMoney(0);
+                activityLifecycleCallbacks.getRunTask().setImputationBeanOrder(null);
+            } else {
+                if (listTransactionDTO.getTransactionStatus().equals("S")) {
+                    OkhttpUtils.PullPost(1, "Transaction Successful", activityLifecycleCallbacks.getAppConfig(), takeLatestOrderBean);
+                } else {
+                    OkhttpUtils.PullPost(0, "未知原因", activityLifecycleCallbacks.getAppConfig(), takeLatestOrderBean);
+                }
+                activityLifecycleCallbacks.getTakeLatestOrderRun().setBalance(0);
+                activityLifecycleCallbacks.getTakeLatestOrderRun().setTakeLatestOrderBean(null);
+            }
             //订单号
             listTransactionDTO.getDescriptions().forEach(descriptionsDTO -> {
                 if (descriptionsDTO.getTitle().equals("Reference Number")) {
@@ -176,11 +191,10 @@ public class MainHook implements IXposedHookLoadPackage {
                 }
             });
 
-            activityLifecycleCallbacks.getRunTask().setMoney(0);
-            activityLifecycleCallbacks.getRunTask().setImputationBeanOrder(null);
             Logs.d("转账信息：" + JSON.toJSONString(listTransactionDTO));
         });
     }
+
 
     //处理代收数据
     private void handlerReceiveData(OnlineTransactionEntity onlineTransactionEntity) {
