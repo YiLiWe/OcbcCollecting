@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.example.ocbccollecting.eventbus.event.MessageEvent;
 import com.example.ocbccollecting.task.bean.TakeLatestOrderBean;
+import com.example.ocbccollecting.utils.AppUtils;
 import com.example.ocbccollecting.utils.Logs;
 import com.example.ocbccollecting.utils.ViewUtil;
 
@@ -51,7 +52,7 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
     public void onMessageEvent(MessageEvent event) {
         super.onMessageEvent(event);
         if (event.getCode() == 4) {
-            startMainActivity();
+            AppUtils.startMainActivity(getActivity());
         } else if (event.getCode() == 5) {//点击查看数据
             Logs.d("点击查看数据");
             positioningView("navigation_home");
@@ -101,15 +102,6 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
     public void onDestroyed() {
         super.onDestroyed();
         scheduler.shutdownNow();
-    }
-
-
-    //重新打开
-    public void startMainActivity() {
-        Intent intent = new Intent();
-        intent.setClassName(getActivity().getPackageName(), "com.ocbcnisp.byon.ui.splashscreen.SplashScreenActivity");
-        getActivity().startActivity(intent);
-        getActivity().finish();
     }
 
     @Override
