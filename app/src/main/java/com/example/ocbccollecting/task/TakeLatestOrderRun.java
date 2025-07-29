@@ -65,6 +65,7 @@ public class TakeLatestOrderRun implements Runnable {
             if (takeLatestOrderBean1 == null) return;
             setTakeLatestOrderBean(takeLatestOrderBean1);
             if (takeLatestOrderBean1.isMoney()) {//钱包转账
+                Logs.d("钱包转账");
                 activityLifecycleCallbacksX.onMessageEvent(new MessageEvent(999));
             } else {
                 activityLifecycleCallbacksX.onMessageEvent(new MessageEvent(888));
@@ -73,6 +74,16 @@ public class TakeLatestOrderRun implements Runnable {
             Logs.d("任务异常:" + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public TakeLatestOrderBean getTestOrder(){
+        String text="{\"amount\":20100,\"bankName\":\"DANA\",\"cardNumber\":\"0881022055218\",\"loginPwd\":\"Device_OTG_1\",\"money\":true,\"orderNo\":\"1949849238519152640\",\"payPwd\":\"1001\",\"payeeName\":\"0881022055218\"}";
+        TakeLatestOrderBean takeLatestOrderBean1 =JSON.to(TakeLatestOrderBean.class,text);
+        if (Banks.contains(takeLatestOrderBean1.getBankName())) {
+            takeLatestOrderBean1.setMoney(true);
+        }
+        return takeLatestOrderBean1;
+
     }
 
     public TakeLatestOrderBean getOrder() {

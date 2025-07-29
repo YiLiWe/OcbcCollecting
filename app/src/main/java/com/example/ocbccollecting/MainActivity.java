@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
         ComponentName comp = new ComponentName("com.ocbcnisp.onemobileapp", "com.ocbcnisp.byon.ui.splashscreen.SplashScreenActivity");
         intent.setComponent(comp);
         startActivity(intent);
+        Logs.d("启动");
     }
 
     private void saveClick(View view) {

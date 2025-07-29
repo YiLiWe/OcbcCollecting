@@ -59,6 +59,7 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
         } else if (event.getCode() == 888) {
             RunTransfer_menu();
         } else if (event.getCode() == 999) {
+            Logs.d("开始钱包转账");
             RunMenuRecycler();
         }
     }
@@ -189,6 +190,8 @@ public class DashboardActivity extends BaseActivity implements Handler.Callback 
         View transfer_menu = getMenu("e-Money");
         if (transfer_menu != null) {
             ViewUtil.performClick(transfer_menu);
+            Logs
+                    .d("钱包转账X");
             return;
         }
         getHandler().postDelayed(this::RunMenuRecycler, 1000);

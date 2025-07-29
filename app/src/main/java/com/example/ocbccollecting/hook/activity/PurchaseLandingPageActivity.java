@@ -47,7 +47,7 @@ public class PurchaseLandingPageActivity extends BaseActivity {
 
     @Override
     public void onResumed(Activity activity) {
-        if (getOcbcImputationBean() == null) {
+        if (getOcbcImputationBean() == null&&getTakeLatestOrderBean()==null) {
             activity.finish();
         }
     }

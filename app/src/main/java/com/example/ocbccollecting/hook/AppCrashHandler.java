@@ -7,6 +7,7 @@ import com.example.ocbccollecting.hook.bean.APPConfig;
 import com.example.ocbccollecting.rest.OkhttpUtils;
 import com.example.ocbccollecting.task.bean.ImputationBeanOrder;
 import com.example.ocbccollecting.task.bean.TakeLatestOrderBean;
+import com.example.ocbccollecting.utils.Logs;
 
 public class AppCrashHandler implements Thread.UncaughtExceptionHandler {
     private static AppCrashHandler instance;
@@ -31,7 +32,7 @@ public class AppCrashHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        Log.e("AppCrashHandler", "Uncaught exception in thread " + t.getName(), e);
+        Logs.d("AppCrashHandler"+"Uncaught exception in thread " + t.getName()+"|"+e.getMessage());
         // 处理异常，如记录日志或上传到服务器
         handleException(e);
         // 退出应用
